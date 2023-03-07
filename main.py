@@ -1,6 +1,7 @@
 import random
 
-options = ("piedra", "papel", "tijera")
+OPTIONS = {"1": "Piedra", "2": "Papel", "3": "Tijera"}
+LIST_OF_OPTIONS = list(OPTIONS.keys())
 
 computer_wins = 0
 user_wins = 0
@@ -15,51 +16,70 @@ while True:
     print("computer_wins", computer_wins)
     print("user_wins", user_wins)
 
-    user_option = input("piedra, papel o tijera => ")
-    user_option = user_option.lower()
 
     rounds += 1
-
-    if user_option not in options:
-        print("Esa opcion no es valida")
-        print("Ronda invalida")
-        rounds -= 1
+    if not user_option.isdigit():
+        print("Opción invalida")
         continue
 
-    computer_option = random.choice(options)
+    if user_option == "4":
+        print(score)
+        continue
 
-    print("User option =>", user_option)
-    print("Computer option =>", computer_option)
+    if user_option not in LIST_OF_OPTIONS:
+        print("Gracias por jugar.¡Adios!")
+        break
+
+    computer_option = random.choice(LIST_OF_OPTIONS)
+
+    user_opt_str = OPTIONS[user_option]
+    comp_opt_str = OPTIONS[computer_option]
+    print(f"El usuario escogio: {user_opt_str}")
+    print(f"La computadora escogio: {comp_opt_str}")
+
+    print(ASTERISKS)
 
     if user_option == computer_option:
-        print("Empate!")
-    elif user_option == "piedra":
-        if computer_option == "tijera":
-            print("piedra gana a tijera")
-            print("user gano!")
-            user_wins += 1
-        else:
-            print("Papel gana a piedra")
-            print("computer gano!")
-            computer_wins += 1
-    elif user_option == "papel":
-        if computer_option == "piedra":
-            print("papel gana a piedra")
-            print("user gano")
-            user_wins += 1
-        else:
-            print("tijera gana a papel")
-            print("computer gano!")
-            computer_wins += 1
-    elif user_option == "tijera":
-        if computer_option == "papel":
-            print("tijera gana a papel")
-            print("user gano!")
-            user_wins += 1
-        else:
-            print("piedra gana a tijera")
-            print("computer gano!")
-            computer_wins += 1
+        print("Empate")
+        print(score)
+        rounds += 1
+        continue
+
+    user_win_str = f"Gana usuario: {user_opt_str} le gana a {comp_opt_str}".join(
+        ["\n", ASTERISKS]
+    )
+    computer_win_str = (
+        f"Gana computadora: {comp_opt_str} le gana a {user_opt_str}".join(
+            ["\n", ASTERISKS]
+        )
+    )
+
+    if user_option == "1" and computer_option == "2":
+        computer_wins += 1
+        rounds += 1
+        print(computer_win_str)
+    elif user_option == "1" and computer_option == "3":
+        user_wins += 1
+        rounds += 1
+        print(user_win_str)
+
+    if user_option == "2" and computer_option == "1":
+        user_wins += 1
+        rounds += 1
+        print(user_win_str)
+    elif user_option == "2" and computer_option == "3":
+        computer_wins += 1
+        rounds += 1
+        print(computer_win_str)
+
+    if user_option == "3" and computer_option == "1":
+        computer_wins += 1
+        rounds += 1
+        print(computer_win_str)
+    elif user_option == "3" and computer_option == "2":
+        user_wins += 1
+        rounds += 1
+        print(user_win_str)
 
     if computer_wins == 2:
         print("El ganador es la computadora")
