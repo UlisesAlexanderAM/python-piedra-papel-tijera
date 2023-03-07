@@ -3,21 +3,33 @@ import random
 OPTIONS = {"1": "Piedra", "2": "Papel", "3": "Tijera"}
 LIST_OF_OPTIONS = list(OPTIONS.keys())
 
-computer_wins = 0
-user_wins = 0
+INSTRUCTIONS = """
+Instrucciones: teclee el numero de la opcion deseada
+para el juego de piedra, papel o tijera:
+1.- Piedra
+2.- Papel
+3.- Tijera
+4.- Saltar ronda
+Cualquier otro numero - Salir del juego
+"""
 
-rounds = 1
+INPUT_MSG = "Teclee el numero de la opción deseada: "
+
+print(INSTRUCTIONS)
 
 while True:
-    print("*" * 10)
-    print("RONDA", rounds)
-    print("*" * 10)
+    computer_wins = 0
+    user_wins = 0
+    rounds = 1
+    computer_score = f"Victorias de la computadora: {computer_wins}"
+    user_score = f"Victorias del usuario: {user_wins}"
 
-    print("computer_wins", computer_wins)
-    print("user_wins", user_wins)
+    user_option = input(INPUT_MSG)
+    LEN_INPUT_MSG = len(INPUT_MSG)
+    ASTERISKS = "*" * LEN_INPUT_MSG
 
+    score = "\n".join(["Marcador", computer_score, user_score, ASTERISKS])
 
-    rounds += 1
     if not user_option.isdigit():
         print("Opción invalida")
         continue
@@ -29,6 +41,12 @@ while True:
     if user_option not in LIST_OF_OPTIONS:
         print("Gracias por jugar.¡Adios!")
         break
+
+    print(ASTERISKS)
+    print(f"RONDA {rounds}")
+    print(ASTERISKS)
+
+    print(score)
 
     computer_option = random.choice(LIST_OF_OPTIONS)
 
