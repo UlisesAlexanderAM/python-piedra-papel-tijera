@@ -15,6 +15,9 @@ Cualquier otro numero - Salir del juego
 
 INPUT_MSG = "Teclee el numero de la opción deseada: "
 
+LEN_INPUT_MSG = len(INPUT_MSG)
+ASTERISKS = "*" * LEN_INPUT_MSG
+
 
 def build_score(user_wins: int, computer_wins: int, divider: str) -> str:
     computer_score = f"Victorias de la computadora: {computer_wins}"
@@ -41,8 +44,6 @@ def main():
         rounds = 1
 
         user_option = input(INPUT_MSG)
-        LEN_INPUT_MSG = len(INPUT_MSG)
-        ASTERISKS = "*" * LEN_INPUT_MSG
 
         score = build_score(user_wins, computer_wins, ASTERISKS)
 
@@ -65,9 +66,7 @@ def main():
 
         computer_option = random.choice(LIST_OF_OPTIONS)
 
-        options_display = build_options_display(
-            user_option, computer_option, ASTERISKS
-        )
+        options_display = build_options_display(user_option, computer_option, ASTERISKS)
 
         print(options_display)
 
