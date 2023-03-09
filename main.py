@@ -27,6 +27,12 @@ def build_round_header(rounds: int, divider: str) -> str:
     return "\n".join([divider, f"RONDA {rounds}", divider])
 
 
+def build_options_display(user_option: str, computer_option: str, divider: str) -> str:
+    user_str = f"El usuario escogio: {OPTIONS[user_option]}"
+    computer_str = f"La computadora escogio: {OPTIONS[computer_option]}"
+    return "\n".join([user_str, computer_str, divider])
+
+
 def main():
     print(INSTRUCTIONS)
     while True:
@@ -59,12 +65,11 @@ def main():
 
         computer_option = random.choice(LIST_OF_OPTIONS)
 
-        user_opt_str = OPTIONS[user_option]
-        comp_opt_str = OPTIONS[computer_option]
-        print(f"El usuario escogio: {user_opt_str}")
-        print(f"La computadora escogio: {comp_opt_str}")
+        options_display = build_options_display(
+            user_option, computer_option, ASTERISKS
+        )
 
-        print(ASTERISKS)
+        print(options_display)
 
         if user_option == computer_option:
             print("Empate")
