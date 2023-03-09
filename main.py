@@ -16,11 +16,15 @@ Cualquier otro numero - Salir del juego
 INPUT_MSG = "Teclee el numero de la opción deseada: "
 
 
-def build_score(user_wins, computer_wins, divisor):
+def build_score(user_wins, computer_wins, divider):
     computer_score = f"Victorias de la computadora: {computer_wins}"
     user_score = f"Victorias del usuario: {user_wins}"
-    score = "\n".join(["Marcador", computer_score, user_score, divisor])
+    score = "\n".join(["Marcador", computer_score, user_score, divider])
     return score
+
+
+def build_round_header(rounds, divider):
+    return "\n".join([divider, f"RONDA {rounds}", divider])
 
 
 def main():
@@ -48,10 +52,9 @@ def main():
             print("Gracias por jugar.¡Adios!")
             break
 
-        print(ASTERISKS)
-        print(f"RONDA {rounds}")
-        print(ASTERISKS)
+        round_header = build_round_header(rounds, ASTERISKS)
 
+        print(round_header)
         print(score)
 
         computer_option = random.choice(LIST_OF_OPTIONS)
