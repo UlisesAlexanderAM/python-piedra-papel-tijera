@@ -36,6 +36,21 @@ def build_options_display(user_option: str, computer_option: str, divider: str) 
     return "\n".join([user_str, computer_str, divider])
 
 
+def build_result_msg(result: str, score: str) -> str:
+    return "\n".join([result, score])
+
+
+def check_user_wins(user_option: str, computer_option: str) -> bool:
+    if user_option == "1" and computer_option == "3":
+        return True
+    if user_option == "2" and computer_option == "1":
+        return True
+    if user_option == "3" and computer_option == "2":
+        return True
+    else:
+        return False
+
+
 def main():
     print(INSTRUCTIONS)
     while True:
@@ -71,46 +86,22 @@ def main():
         print(options_display)
 
         if user_option == computer_option:
-            print("Empate")
-            print(score)
+            result_msg = build_result_msg("Empataste esta ronda", score)
+            print(result_msg)
             rounds += 1
             continue
 
-        user_win_str = f"Gana usuario: {user_opt_str} le gana a {comp_opt_str}".join(
-            ["\n", ASTERISKS]
-        )
-        computer_win_str = (
-            f"Gana computadora: {comp_opt_str} le gana a {user_opt_str}".join(
-                ["\n", ASTERISKS]
-            )
-        )
-
-        if user_option == "1" and computer_option == "2":
-            computer_wins += 1
+        elif check_user_wins(user_option, computer_option):
+            result_msg = build_result_msg("Ganaste esta ronda", score)
+            print(result_msg)
             rounds += 1
-            print(computer_win_str)
-        elif user_option == "1" and computer_option == "3":
             user_wins += 1
-            rounds += 1
-            print(user_win_str)
 
-        if user_option == "2" and computer_option == "1":
-            user_wins += 1
+        else:
+            result_msg = build_result_msg("Perdiste esta ronda", score)
+            print(result_msg)
             rounds += 1
-            print(user_win_str)
-        elif user_option == "2" and computer_option == "3":
             computer_wins += 1
-            rounds += 1
-            print(computer_win_str)
-
-        if user_option == "3" and computer_option == "1":
-            computer_wins += 1
-            rounds += 1
-            print(computer_win_str)
-        elif user_option == "3" and computer_option == "2":
-            user_wins += 1
-            rounds += 1
-            print(user_win_str)
 
         if computer_wins == 2:
             print("El ganador es la computadora")
