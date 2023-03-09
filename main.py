@@ -16,14 +16,14 @@ Cualquier otro numero - Salir del juego
 INPUT_MSG = "Teclee el numero de la opción deseada: "
 
 
-def build_score(user_wins, computer_wins, divider):
+def build_score(user_wins: int, computer_wins: int, divider: str) -> str:
     computer_score = f"Victorias de la computadora: {computer_wins}"
     user_score = f"Victorias del usuario: {user_wins}"
     score = "\n".join(["Marcador", computer_score, user_score, divider])
     return score
 
 
-def build_round_header(rounds, divider):
+def build_round_header(rounds: int, divider: str) -> str:
     return "\n".join([divider, f"RONDA {rounds}", divider])
 
 
