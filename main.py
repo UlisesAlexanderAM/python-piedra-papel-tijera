@@ -16,20 +16,25 @@ Cualquier otro numero - Salir del juego
 INPUT_MSG = "Teclee el numero de la opción deseada: "
 
 
+def build_score(user_wins, computer_wins, divisor):
+    computer_score = f"Victorias de la computadora: {computer_wins}"
+    user_score = f"Victorias del usuario: {user_wins}"
+    score = "\n".join(["Marcador", computer_score, user_score, divisor])
+    return score
+
+
 def main():
     print(INSTRUCTIONS)
     while True:
         computer_wins = 0
         user_wins = 0
         rounds = 1
-        computer_score = f"Victorias de la computadora: {computer_wins}"
-        user_score = f"Victorias del usuario: {user_wins}"
 
         user_option = input(INPUT_MSG)
         LEN_INPUT_MSG = len(INPUT_MSG)
         ASTERISKS = "*" * LEN_INPUT_MSG
 
-        score = "\n".join(["Marcador", computer_score, user_score, ASTERISKS])
+        score = build_score(user_wins, computer_wins, ASTERISKS)
 
         if not user_option.isdigit():
             print("Opción invalida")
