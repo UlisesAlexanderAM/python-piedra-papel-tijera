@@ -1,4 +1,9 @@
-import random
+"""
+Game of Rock,paper or scissor in spanish
+---
+Juego de piedra, papel o tijera
+"""
+from random import choice
 
 OPTIONS = {"1": "Piedra", "2": "Papel", "3": "Tijera"}
 LIST_OF_OPTIONS = list(OPTIONS.keys())
@@ -20,6 +25,16 @@ ASTERISKS = "*" * LEN_INPUT_MSG
 
 
 def build_score(user_wins: int, computer_wins: int, divider: str) -> str:
+    """Function that builds the score string
+
+    Args:
+        user_wins (int): Number of victories for the user
+        computer_wins (int): Number of victories for the computer
+        divider (str): A string with a divisor
+
+    Returns:
+        str: The score string
+    """
     computer_score = f"Victorias de la computadora: {computer_wins}"
     user_score = f"Victorias del usuario: {user_wins}"
     score = "\n".join(["Marcador", computer_score, user_score, divider])
@@ -27,20 +42,58 @@ def build_score(user_wins: int, computer_wins: int, divider: str) -> str:
 
 
 def build_round_header(rounds: int, divider: str) -> str:
+    """Function that builds the round header string
+
+    Args:
+        rounds (int): Round to play
+        divider (str): A string with a divisor
+
+    Returns:
+        str: The round header string
+    """
     return "\n".join([divider, f"RONDA {rounds}", divider])
 
 
 def build_options_display(user_option: str, computer_option: str, divider: str) -> str:
+    """Functions that builds a string to display the options
+       of the user and computer
+
+    Args:
+        user_option (str): Option selected by the user
+        computer_option (str): Option selected by the computer
+        divider (str): A string with a divider
+
+    Returns:
+        str: String that displays the options of the user and computer
+    """
     user_str = f"El usuario escogio: {OPTIONS[user_option]}"
     computer_str = f"La computadora escogio: {OPTIONS[computer_option]}"
     return "\n".join([user_str, computer_str, divider])
 
 
 def build_result_msg(result: str, score: str) -> str:
+    """Function that builds a string to display the result of the round
+
+    Args:
+        result (str): Who won the round
+        score (str): The score up to this momment
+
+    Returns:
+        str: Message with the result
+    """
     return "\n".join([result, score])
 
 
 def check_user_wins(user_option: str, computer_option: str) -> bool:
+    """Function that checks if the user won the round
+
+    Args:
+        user_option (str): The option that the user choose
+        computer_option (str): The option that the computer choose
+
+    Returns:
+        bool: True if the user won false otherwise
+    """
     if user_option == "1" and computer_option == "3":
         return True
     if user_option == "2" and computer_option == "1":
@@ -52,6 +105,7 @@ def check_user_wins(user_option: str, computer_option: str) -> bool:
 
 
 def main():
+    """Function with the main logic of the game"""
     print(INSTRUCTIONS)
     while True:
         computer_wins = 0
@@ -79,7 +133,7 @@ def main():
         print(round_header)
         print(score)
 
-        computer_option = random.choice(LIST_OF_OPTIONS)
+        computer_option = choice(LIST_OF_OPTIONS)
 
         options_display = build_options_display(user_option, computer_option, ASTERISKS)
 
