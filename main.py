@@ -116,8 +116,8 @@ def main():
         if not rounds.isdigit():
             print("Formato incorrecto, debe ingresar un numero")
             continue
-        else:
-            rounds = int(rounds)
+
+        rounds = int(rounds)
 
         user_option = input(INPUT_MSG)
 
