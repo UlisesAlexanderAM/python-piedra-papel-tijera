@@ -19,7 +19,7 @@ Cualquier otro numero - Salir del juego
 """
 
 INPUT_MSG = "Teclee el numero de la opción deseada: "
-
+ASK_NUM_ROUNDS = "Ingrese el numero de rondas a jugar: "
 LEN_INPUT_MSG = len(INPUT_MSG)
 ASTERISKS = "*" * LEN_INPUT_MSG
 
@@ -110,7 +110,14 @@ def main():
     while True:
         computer_wins = 0
         user_wins = 0
-        rounds = 1
+        current_round = 1
+
+        rounds = input(ASK_NUM_ROUNDS)
+        if not rounds.isdigit():
+            print("Formato incorrecto, debe ingresar un numero")
+            continue
+        else:
+            rounds = int(rounds)
 
         user_option = input(INPUT_MSG)
 
@@ -128,7 +135,7 @@ def main():
             print("Gracias por jugar.¡Adios!")
             break
 
-        round_header = build_round_header(rounds, ASTERISKS)
+        round_header = build_round_header(current_round, ASTERISKS)
 
         print(round_header)
         print(score)
@@ -142,27 +149,22 @@ def main():
         if user_option == computer_option:
             result_msg = build_result_msg("Empataste esta ronda", score)
             print(result_msg)
-            rounds += 1
+            current_round += 1
             continue
 
         elif check_user_wins(user_option, computer_option):
             result_msg = build_result_msg("Ganaste esta ronda", score)
             print(result_msg)
-            rounds += 1
+            current_round += 1
             user_wins += 1
 
         else:
             result_msg = build_result_msg("Perdiste esta ronda", score)
             print(result_msg)
-            rounds += 1
+            current_round += 1
             computer_wins += 1
 
-        if computer_wins == 2:
-            print("El ganador es la computadora")
-            break
-
-        if user_wins == 2:
-            print("El ganador es el usuario")
+        if current_round > rounds:
             break
 
 
