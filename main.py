@@ -42,7 +42,17 @@ def ask_rounds() -> int:
 
     return int(rounds)
 
+
+def validate_user_selection() -> str:
+    while True:
+        print(INSTRUCTIONS)
         user_option = input(INPUT_MSG)
+        if user_option.isdigit():
+            break
+        print("Opcion invalida. Ingrese una opcion valida")
+
+    return user_option
+
 
 def main():
     """Function with the main logic of the game"""
@@ -54,9 +64,7 @@ def main():
     while True:
         score = build_score(user_wins, computer_wins, ASTERISKS)
 
-        if not user_option.isdigit():
-            print("Opción invalida")
-            continue
+        user_option = validate_user_selection()
 
         if user_option == "4":
             print(score)
