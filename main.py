@@ -54,6 +54,35 @@ def validate_user_selection() -> str:
     return user_option
 
 
+def check_winner(user_option: str, computer_option: str):
+    if user_option == computer_option:
+        result = 0
+    elif check_user_wins(user_option, computer_option):
+        result = 1
+    else:
+        result = -1
+
+    return result
+
+
+def modified_wins(user_wins: int, computer_wins: int, result: int):
+    if result == 1:
+        user_wins += 1
+    elif result == -1:
+        computer_wins += 1
+
+    return user_wins, computer_wins
+
+
+def round_result_msg(result: int, score: str):
+    if result == 0:
+        return build_result_msg("Empataste esta ronda", score)
+    if result == 1:
+        return build_result_msg("Ganaste esta ronda", score)
+    if result == -1:
+        return build_result_msg("Perdiste esta ronda", score)
+
+
 def main():
     """Function with the main logic of the game"""
     print(WELCOME_MSG)
@@ -87,23 +116,11 @@ def main():
 
         print(options_display)
 
-        if user_option == computer_option:
-            result_msg = build_result_msg("Empataste esta ronda", score)
-            print(result_msg)
-            current_round += 1
-            continue
-
-        elif check_user_wins(user_option, computer_option):
-            result_msg = build_result_msg("Ganaste esta ronda", score)
-            print(result_msg)
-            current_round += 1
-            user_wins += 1
-
-        else:
-            result_msg = build_result_msg("Perdiste esta ronda", score)
-            print(result_msg)
-            current_round += 1
-            computer_wins += 1
+        result = check_winner(user_option, computer_option)
+        user_wins, computer_wins = modified_wins(user_wins, computer_wins, result)
+        current_round += 1
+        result_msg = round_result_msg(result, score)
+        print(result_msg)
 
         if current_round > rounds:
             break
