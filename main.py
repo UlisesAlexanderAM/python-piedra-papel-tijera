@@ -25,6 +25,7 @@ para el juego de piedra, papel o tijera:
 4.- Saltar ronda
 Cualquier otro numero - Salir del juego
 """
+WELCOME_MSG = "Bienvenido al juego de piedra, papel o tijera"
 
 INPUT_MSG = "Teclee el numero de la opción deseada: "
 ASK_NUM_ROUNDS = "Ingrese el numero de rondas a jugar: "
@@ -32,23 +33,25 @@ LEN_INPUT_MSG = len(INPUT_MSG)
 ASTERISKS = "*" * LEN_INPUT_MSG
 
 
-def main():
-    """Function with the main logic of the game"""
-    print(INSTRUCTIONS)
+def ask_rounds() -> int:
     while True:
-        computer_wins = 0
-        user_wins = 0
-        current_round = 1
-
         rounds = input(ASK_NUM_ROUNDS)
-        if not rounds.isdigit():
-            print("Formato incorrecto, debe ingresar un numero")
-            continue
+        if rounds.isdigit():
+            break
+        print("Valor invalido ingrese un numero")
 
-        rounds = int(rounds)
+    return int(rounds)
 
         user_option = input(INPUT_MSG)
 
+def main():
+    """Function with the main logic of the game"""
+    print(WELCOME_MSG)
+    computer_wins = 0
+    user_wins = 0
+    current_round = 1
+    rounds = ask_rounds()
+    while True:
         score = build_score(user_wins, computer_wins, ASTERISKS)
 
         if not user_option.isdigit():
