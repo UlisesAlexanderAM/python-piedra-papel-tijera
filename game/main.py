@@ -5,13 +5,13 @@ Juego de piedra, papel o tijera
 """
 from random import choice
 
-from build_msgs import (
+from libs.build_msgs import (
     build_options_display,
     build_result_msg,
     build_round_header,
     build_score,
 )
-from check_user_wins import check_user_wins
+from libs.check_user_wins import check_user_wins
 
 OPTIONS = {"1": "Piedra", "2": "Papel", "3": "Tijera"}
 LIST_OF_OPTIONS = list(OPTIONS.keys())
